@@ -1,0 +1,35 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 1rem;
+  font-family: "Hiragino Kaku Gothic ProN", "BIZ UDPGothic", system-ui, sans-serif;
+  background: #f5f7fa; color: #222; line-height: 1.6;
+}
+main { max-width: 40rem; margin: 0 auto; }
+h1 { font-size: 1.3rem; }
+h2 { font-size: 1.1rem; }
+.card { background: #fff; border-radius: 12px; padding: 1rem; margin: 1rem 0; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+label { display: block; font-size: .9rem; margin-bottom: .25rem; }
+input {
+  width: 100%; padding: .6rem; font-size: 1.1rem;
+  border: 1px solid #bbb; border-radius: 8px; margin-bottom: .5rem;
+}
+button {
+  display: block; width: 100%; padding: .7rem; margin: .5rem 0;
+  font-size: 1rem; border: 1px solid #2b6cb0; border-radius: 8px;
+  background: #fff; color: #2b6cb0; cursor: pointer;
+}
+button.primary { background: #2b6cb0; color: #fff; }
+button:disabled { opacity: .6; cursor: default; }
+.choice { text-align: left; border-color: #bbb; color: #222; }
+.choice.correct { border-color: #2f855a; background: #e6f4ea; }
+.choice.wrong { border-color: #c53030; background: #fdecec; }
+.code-display {
+  font-size: 2rem; font-weight: bold; letter-spacing: .1em;
+  text-align: center; background: #fff; border-radius: 12px; padding: 1rem;
+}
+.error { color: #c53030; }
+.warn { background: #fff8e1; border-radius: 8px; padding: .75rem; }
+.note { color: #666; font-size: .85rem; }
+#unit-list { list-style: none; padding: 0; }
+#unit-list li { background: #fff; border-radius: 12px; padding: .75rem 1rem; margin: .5rem 0; }
+#q-feedback { background: #fff; border-radius: 12px; padding: 1rem; margin-top: 1rem; }
