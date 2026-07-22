@@ -3,25 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
   <title>学校の片づけ術 チェックテスト</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <main id="app">
 
-  <section id="screen-start">
+  <section id="screen-gate">
     <h1>学校の片づけ術 チェックテスト</h1>
     <div class="card">
-      <p>学校片づけアドバイザー・<strong>伊藤寛子</strong>さん(元小学校教諭31年、著書『学校の片づけ術』学事出版)が公開しているメソッドから、学校の片付けの考え方を7問で確認する単発テストです。</p>
+      <p>この単発テストは、講演会でご案内した合言葉を入力した方のみご利用いただけます。</p>
+      <label for="gate-input">合言葉</label>
+      <input id="gate-input" placeholder="合言葉を入力" autocomplete="off">
+      <button id="btn-gate" class="primary">進む</button>
+      <p id="gate-error" class="error" hidden></p>
+    </div>
+  </section>
+
+  <section id="screen-start" hidden>
+    <h1>学校の片づけ術 チェックテスト</h1>
+    <div class="card">
+      <p>学校片づけアドバイザー・<strong>伊藤寛子</strong>さんの講演資料「片づけから始める学校の働き方改革」(群馬県公立小中学校事務職員研究会)をもとに、学校の片付けの考え方を9問で確認する単発テストです。</p>
       <p class="note">出題は毎回、同じ論点の中からランダムに変わります。学習コードは不要で、結果はどこにも保存されません。</p>
-      <button id="btn-start" class="primary">テストを始める(全7問)</button>
+      <button id="btn-start" class="primary">テストを始める(全9問)</button>
     </div>
     <div class="card">
       <h2>出典</h2>
-      <p class="note">・東洋経済education×ICT「整理収納のプロが語る、忙しい学校も今すぐ可能な『時短をかなえる片付け術』」(2023/4/2)<br>
-      ・伊藤寛子『学校の片づけ術 今日からできて、「キレイ」が続く仕組み作り』(学事出版)<br>
-      ・note「まき style」掲載インタビュー<br>
-      設問文はこれらの公開情報をもとにした独自作成です。</p>
+      <p class="note">・伊藤寛子氏 講演資料「片づけから始める学校の働き方改革」(群馬県公立小中学校事務職員研究会)<br>
+      設問文はこの講演資料の内容をもとにした独自作成です。</p>
     </div>
   </section>
 

@@ -1,8 +1,14 @@
 // 単発テスト(学校の片づけ術)。学習コード・進捗保存なし。
 // lastTestIds だけを画面内で持ち回り、「別の類題でもう一度」を実現する。
+//
+// 合言葉画面はクライアント側チェックのみで、真の意味でのアクセス制限ではない
+// (ソースを見れば合言葉も問題データも読める)。検索エンジン避け(noindex)と
+// 「講演会に参加した人だけに合言葉を伝える」運用を前提にした簡易的な入口。
 import { buildTest, gradeTest, emptyProgress } from './quiz-engine.js';
 
 const $ = (id) => document.getElementById(id);
+const GATE_PASSWORD = 'kensyu2026';
+const GATE_SESSION_KEY = 'kz2-gate-unlocked';
 
 const state = {
   questions: [],
@@ -16,12 +22,37 @@ function show(id) {
   window.scrollTo(0, 0);
 }
 
-async function init() {
-  state.questions = await (await fetch('questions/katazuke.json')).json();
+function init() {
+  $('btn-gate').addEventListener('click', tryUnlock);
+  $('gate-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') tryUnlock(); });
   $('btn-start').addEventListener('click', start);
   $('btn-next').addEventListener('click', next);
   $('btn-again').addEventListener('click', start);
   $('btn-top').addEventListener('click', () => show('screen-start'));
+
+  if (sessionStorage.getItem(GATE_SESSION_KEY) === '1') {
+    loadQuiz();
+  } else {
+    show('screen-gate');
+  }
+}
+
+function tryUnlock() {
+  $('gate-error').hidden = true;
+  const input = $('gate-input').value.trim();
+  if (input === GATE_PASSWORD) {
+    sessionStorage.setItem(GATE_SESSION_KEY, '1');
+    loadQuiz();
+  } else {
+    $('gate-error').textContent = '合言葉が違います。講演会でご案内した合言葉をご確認ください。';
+    $('gate-error').hidden = false;
+  }
+}
+
+async function loadQuiz() {
+  if (state.questions.length === 0) {
+    state.questions = await (await fetch('questions/katazuke.json')).json();
+  }
   show('screen-start');
 }
 
