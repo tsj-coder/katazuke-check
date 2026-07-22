@@ -87,3 +87,19 @@ export function updateProgress(progress, grade, unit, today = isoToday()) {
 function isoToday() {
   return new Date().toISOString().slice(0, 10);
 }
+
+// 選択肢の並びをシャッフルし、answer(正解インデックス)を追従させる。
+// 正解を先頭に書いて作問すると「常に1番目が正解」になり得点しやすくなってしまうため、
+// 出題のたびにこの関数を通す。
+export function shuffleChoices(question, rng = Math.random) {
+  const order = question.choices.map((_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(rng() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  return {
+    ...question,
+    choices: order.map((i) => question.choices[i]),
+    answer: order.indexOf(question.answer),
+  };
+}

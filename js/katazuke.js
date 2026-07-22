@@ -4,7 +4,7 @@
 // 合言葉画面はクライアント側チェックのみで、真の意味でのアクセス制限ではない
 // (ソースを見れば合言葉も問題データも読める)。検索エンジン避け(noindex)と
 // 「講演会に参加した人だけに合言葉を伝える」運用を前提にした簡易的な入口。
-import { buildTest, gradeTest, emptyProgress } from './quiz-engine.js';
+import { buildTest, gradeTest, emptyProgress, shuffleChoices } from './quiz-engine.js';
 
 const $ = (id) => document.getElementById(id);
 const GATE_PASSWORD = 'kensyu2026';
@@ -58,7 +58,9 @@ async function loadQuiz() {
 
 function start() {
   const progress = { ...emptyProgress(), lastTestIds: state.lastTestIds };
-  state.test = buildTest({ questions: state.questions, progress, unit: 0 });
+  const built = buildTest({ questions: state.questions, progress, unit: 0 });
+  const items = built.items.map((item) => ({ ...item, question: shuffleChoices(item.question) }));
+  state.test = { unit: built.unit, items };
   state.answers = [];
   renderQuestion();
   show('screen-test');
